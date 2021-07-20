@@ -66,8 +66,8 @@ public class AllTreatmentController {
     }
 
     public void readAllAndShowInTableView() {
-        comboBox.getSelectionModel().select(0);
         this.tableviewContent.clear();
+        comboBox.getSelectionModel().select(0);
         this.dao = DAOFactory.getDAOFactory().createTreatmentDAO();
         List<Treatment> allTreatments;
         try {
