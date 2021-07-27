@@ -58,6 +58,7 @@
                <children>
                   <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#handleAdd" prefWidth="90.0" text="Hinzufügen" />
                   <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#handleDeleteRow" prefWidth="90.0" text="Löschen" />
+                  <Button fx:id="btnLock" mnemonicParsing="false" onAction="#handleLock" prefWidth="90.0" text="Sperren" />
                </children>
             </HBox>
          </children>

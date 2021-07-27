@@ -13,6 +13,7 @@ public class Patient extends Person {
     private LocalDate dateOfBirth;
     private String careLevel;
     private String roomnumber;
+    private Boolean active;
     private List<Treatment> allTreatments = new ArrayList<Treatment>();
 
 
@@ -31,12 +32,13 @@ public class Patient extends Person {
      * @param careLevel
      * @param roomnumber
      */
-    public Patient(Long pid, String firstName, String surname, LocalDate dateOfBirth, String careLevel, String roomnumber) {
+    public Patient(Long pid, String firstName, String surname, LocalDate dateOfBirth, String careLevel, String roomnumber, Boolean active) {
         super(firstName, surname);
         this.pid = pid;
         this.dateOfBirth = dateOfBirth;
         this.careLevel = careLevel;
         this.roomnumber = roomnumber;
+        this.active = active;
     }
 
     /**
@@ -60,8 +62,7 @@ public class Patient extends Person {
      * @param dateOfBirth as string in the following format: YYYY-MM-DD
      */
     public void setDateOfBirth(String dateOfBirth) {
-        LocalDate birthday = DateConverter.convertStringToLocalDate(dateOfBirth);
-        this.dateOfBirth = birthday;
+        this.dateOfBirth = DateConverter.convertStringToLocalDate(dateOfBirth);
     }
 
     /**
@@ -122,5 +123,9 @@ public class Patient extends Person {
                 "\nRoomnumber: " + this.roomnumber +
                 "\nRoomnumber: " + this.roomnumber +
                 "\n";
+    }
+
+    public boolean getActive() {
+        return active;
     }
 }

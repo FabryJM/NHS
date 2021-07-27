@@ -23,7 +23,7 @@ public class AllPatientController {
     @FXML
     private TableView<Patient> tableView;
     @FXML
-    private TableColumn<Patient, Integer> colID;
+    private TableColumn<Patient, Long> colID;
     @FXML
     private TableColumn<Patient, String> colFirstName;
     @FXML
@@ -59,7 +59,7 @@ public class AllPatientController {
     public void initialize() {
         readAllAndShowInTableView();
 
-        this.colID.setCellValueFactory(new PropertyValueFactory<Patient, Integer>("pid"));
+        this.colID.setCellValueFactory(new PropertyValueFactory<Patient, Long>("pid"));
 
         //CellValuefactory zum Anzeigen der Daten in der TableView
         this.colFirstName.setCellValueFactory(new PropertyValueFactory<Patient, String>("firstName"));
@@ -154,7 +154,9 @@ public class AllPatientController {
         try {
             allPatients = dao.readAll();
             for (Patient p : allPatients) {
-                this.tableviewContent.add(p);
+                if (p.getActive()) {
+                    this.tableviewContent.add(p);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -174,6 +176,20 @@ public class AllPatientController {
             this.tableView.getItems().remove(selectedItem);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * handles XXX {@link PatientDAO}
+     */
+    @FXML
+    public void handleLock() { //TODO: XXX
+        Patient selectedItem = this.tableView.getSelectionModel().getSelectedItem();
+        try {
+            dao.lockById(selectedItem.getPid());
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 

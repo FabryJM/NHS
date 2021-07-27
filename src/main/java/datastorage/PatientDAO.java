@@ -5,8 +5,11 @@ import utils.DateConverter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Implements the Interface <code>DAOImp</code>. Overrides methods to generate specific patient-SQL-queries.
@@ -77,9 +80,9 @@ public class PatientDAO extends DAOimp<Patient> {
         Patient p = null;
         while (result.next()) {
             LocalDate date = DateConverter.convertStringToLocalDate(result.getString(4));
-            p = new Patient(result.getString(2),
+            p = new Patient(result.getLong(1), result.getString(2),
                     result.getString(3), date,
-                    result.getString(5), result.getString(6));
+                    result.getString(5), result.getString(6), result.getBoolean(7));
             list.add(p);
         }
         return list;
@@ -105,5 +108,12 @@ public class PatientDAO extends DAOimp<Patient> {
     @Override
     protected String getDeleteStatementString(long key) {
         return String.format("Delete FROM patient WHERE pid=%d", key);
+    }
+
+    public void lockById(long key) throws SQLException {
+        Statement st = conn.createStatement();
+        LocalDate date = LocalDate.now();
+        st.executeUpdate(String.format("UPDATE PATIENT set active = 0 WHERE pid=%d", key));
+        st.executeUpdate(String.format("INSERT INTO PATIENT_LOCK (PID, LOCK_DATE) VALUES (%d, '%s')",key ,date.toString()));
     }
 }
