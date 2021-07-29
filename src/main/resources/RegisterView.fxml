@@ -9,10 +9,16 @@
     <children>
         <HBox layoutX="420.0" layoutY="450.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
             <children>
-                <TextField fx:id="txfSurname" prefHeight="26.0" prefWidth="220.0" promptText="Nutzername" />
-                <TextField fx:id="txfFirstname" prefHeight="26.0" prefWidth="220.0" promptText="Passwort" />
-                <Button fx:id="btnAdd" mnemonicParsing="false" prefWidth="90.0" text="Registrieren" />
-            </children></HBox>
+                <TextField fx:id="txfUsername" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Nutzername" />
+                <TextField fx:id="txfFirstname" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Vorname" />
+                <TextField fx:id="txfLastname" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Nachname" />
+                <TextField fx:id="txfDateOfBirth" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Geburtstag" />
+                <TextField fx:id="txfEmail" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Email" />
+                <TextField fx:id="txfPassword" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Passwort" />
+                <TextField fx:id="txfRole" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Rolle" />
+                <Button fx:id="btnRegister" mnemonicParsing="false" prefWidth="90.0" text="Registrieren" />
+            </children>
+        </HBox>
         <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="200.0" spacing="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
             <children>
                 <Label alignment="CENTER" contentDisplay="CENTER" minWidth="400.0" text="Registrieren" textAlignment="CENTER">
