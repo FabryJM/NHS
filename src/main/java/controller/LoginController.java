@@ -24,8 +24,8 @@ public class LoginController {
 
         Statement statement = connection.createStatement();
         statement.executeUpdate(String.format("INSERT INTO patient (" +
-                "USERNAME, FIRSTNAME, LASTNAME, DATEOFBIRTH, EMAIL, PASSWORD, ROLE) " +
-                        "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+                "USERNAME, FIRSTNAME, LASTNAME, DATEOFBIRTH, EMAIL, PASSWORD, ROLE, ACTIVE) " +
+                        "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', true)",
                 inputUsername, inputFirstname, inputLastname, inputDateOfBirth, inputEmail, inputPassword, inputRole));
     }
 
