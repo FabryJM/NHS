@@ -41,6 +41,16 @@ public abstract class DAOimp<T> implements DAO<T>{
         return list;
     }
 
+    public List<T> readOnlyActive() throws SQLException {
+        ArrayList<T> list = new ArrayList<T>();
+        T object = null;
+        Statement statement = conn.createStatement();
+
+        ResultSet resultSet = statement.executeQuery("SELECT TREATMENT.* FROM  TREATMENT INNER JOIN PATIENT ON TREATMENT.PID = PATIENT.PID AND PATIENT.ACTIVE = 1");
+        list = getListFromResultSet(resultSet);
+        return list;
+    }
+
     @Override
     public void update(T t) throws SQLException {
         Statement st = conn.createStatement();
@@ -52,6 +62,8 @@ public abstract class DAOimp<T> implements DAO<T>{
         Statement st = conn.createStatement();
         st.executeUpdate(getDeleteStatementString(key));
     }
+
+    public abstract void deletePatientAfterTenYears(long key) throws SQLException;
 
     protected abstract String getCreateStatementString(T t);
 

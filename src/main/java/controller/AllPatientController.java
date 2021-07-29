@@ -1,17 +1,25 @@
 package controller;
 
+import datastorage.DAOFactory;
 import datastorage.PatientDAO;
 import datastorage.TreatmentDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import model.Patient;
 import utils.DateConverter;
-import datastorage.DAOFactory;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,7 +31,7 @@ public class AllPatientController {
     @FXML
     private TableView<Patient> tableView;
     @FXML
-    private TableColumn<Patient, Integer> colID;
+    private TableColumn<Patient, Long> colID;
     @FXML
     private TableColumn<Patient, String> colFirstName;
     @FXML
@@ -34,8 +42,6 @@ public class AllPatientController {
     private TableColumn<Patient, String> colCareLevel;
     @FXML
     private TableColumn<Patient, String> colRoom;
-    @FXML
-    private TableColumn<Patient, String> colAssets;
 
     @FXML
     Button btnDelete;
@@ -51,11 +57,10 @@ public class AllPatientController {
     TextField txtCarelevel;
     @FXML
     TextField txtRoom;
-    @FXML
-    private TextField txtAssets;
 
     private ObservableList<Patient> tableviewContent = FXCollections.observableArrayList();
     private PatientDAO dao;
+    protected Connection conn;
 
     /**
      * Initializes the corresponding fields. Is called as soon as the corresponding FXML file is to be displayed.
@@ -63,7 +68,7 @@ public class AllPatientController {
     public void initialize() {
         readAllAndShowInTableView();
 
-        this.colID.setCellValueFactory(new PropertyValueFactory<Patient, Integer>("pid"));
+        this.colID.setCellValueFactory(new PropertyValueFactory<Patient, Long>("pid"));
 
         //CellValuefactory zum Anzeigen der Daten in der TableView
         this.colFirstName.setCellValueFactory(new PropertyValueFactory<Patient, String>("firstName"));
@@ -81,9 +86,6 @@ public class AllPatientController {
 
         this.colRoom.setCellValueFactory(new PropertyValueFactory<Patient, String>("roomnumber"));
         this.colRoom.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        this.colAssets.setCellValueFactory(new PropertyValueFactory<Patient, String>("assets"));
-        this.colAssets.setCellFactory(TextFieldTableCell.forTableColumn());
 
         //Anzeigen der Daten
         this.tableView.setItems(this.tableviewContent);
@@ -140,16 +142,6 @@ public class AllPatientController {
     }
 
     /**
-     * handles new asset value
-     * @param event event including the value that a user entered into the cell
-     */
-    @FXML
-    public void handleOnEditAssets(TableColumn.CellEditEvent<Patient, String> event){
-        event.getRowValue().setAssets(event.getNewValue());
-        doUpdate(event);
-    }
-
-    /**
      * updates a patient by calling the update-Method in the {@link PatientDAO}
      * @param t row to be updated by the user (includes the patient)
      */
@@ -161,6 +153,8 @@ public class AllPatientController {
         }
     }
 
+
+
     /**
      * calls readAll in {@link PatientDAO} and shows patients in the table
      */
@@ -171,12 +165,16 @@ public class AllPatientController {
         try {
             allPatients = dao.readAll();
             for (Patient p : allPatients) {
-                this.tableviewContent.add(p);
+                dao.deletePatientAfterTenYears(p.getPid());
+                if (p.getActive()) {
+                    this.tableviewContent.add(p);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      * handles a delete-click-event. Calls the delete methods in the {@link PatientDAO} and {@link TreatmentDAO}
@@ -195,6 +193,20 @@ public class AllPatientController {
     }
 
     /**
+     * handles XXX {@link PatientDAO}
+     */
+    @FXML
+    public void handleLock() {
+        Patient selectedItem = this.tableView.getSelectionModel().getSelectedItem();
+        try {
+            dao.lockById(selectedItem.getPid());
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    /**
      * handles a add-click-event. Creates a patient and calls the create method in the {@link PatientDAO}
      */
     @FXML
@@ -205,9 +217,8 @@ public class AllPatientController {
         LocalDate date = DateConverter.convertStringToLocalDate(birthday);
         String carelevel = this.txtCarelevel.getText();
         String room = this.txtRoom.getText();
-        String assets = this.txtAssets.getText();
         try {
-            Patient p = new Patient(firstname, surname, date, carelevel, room, assets);
+            Patient p = new Patient(firstname, surname, date, carelevel, room);
             dao.create(p);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -225,6 +236,5 @@ public class AllPatientController {
         this.txtBirthday.clear();
         this.txtCarelevel.clear();
         this.txtRoom.clear();
-        this.txtAssets.clear();
     }
 }

@@ -15,7 +15,9 @@ import model.Patient;
 import model.Treatment;
 import datastorage.DAOFactory;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,12 +68,12 @@ public class AllTreatmentController {
     }
 
     public void readAllAndShowInTableView() {
-        this.tableviewContent.clear();
         comboBox.getSelectionModel().select(0);
+        this.tableviewContent.clear();
         this.dao = DAOFactory.getDAOFactory().createTreatmentDAO();
         List<Treatment> allTreatments;
         try {
-            allTreatments = dao.readAll();
+            allTreatments = dao.readOnlyActive();
             for (Treatment treatment : allTreatments) {
                 this.tableviewContent.add(treatment);
             }
@@ -99,6 +101,7 @@ public class AllTreatmentController {
         String p = this.comboBox.getSelectionModel().getSelectedItem();
         this.tableviewContent.clear();
         this.dao = DAOFactory.getDAOFactory().createTreatmentDAO();
+        Patient patient = searchInList(p);
         List<Treatment> allTreatments;
         if(p.equals("alle")){
             try {
@@ -110,7 +113,6 @@ public class AllTreatmentController {
                 e.printStackTrace();
             }
         }
-        Patient patient = searchInList(p);
         if(patient !=null){
             try {
                 allTreatments = dao.readTreatmentsByPid(patient.getPid());

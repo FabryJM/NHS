@@ -13,43 +13,32 @@ public class Patient extends Person {
     private LocalDate dateOfBirth;
     private String careLevel;
     private String roomnumber;
-    private String assets;
+    private Boolean active;
     private List<Treatment> allTreatments = new ArrayList<Treatment>();
 
-    /**
-     * constructs a patient from the given params.
-     * @param firstName
-     * @param surname
-     * @param dateOfBirth
-     * @param careLevel
-     * @param roomnumber
-     * @param assets
-     */
-    public Patient(String firstName, String surname, LocalDate dateOfBirth, String careLevel, String roomnumber, String assets) {
+
+    public Patient(String firstName, String surname, LocalDate dateOfBirth, String careLevel, String roomnumber) {
         super(firstName, surname);
         this.dateOfBirth = dateOfBirth;
         this.careLevel = careLevel;
         this.roomnumber = roomnumber;
-        this.assets = assets;
     }
 
     /**
      * constructs a patient from the given params.
-     * @param pid
      * @param firstName
      * @param surname
      * @param dateOfBirth
      * @param careLevel
      * @param roomnumber
-     * @param assets
      */
-    public Patient(long pid, String firstName, String surname, LocalDate dateOfBirth, String careLevel, String roomnumber, String assets) {
+    public Patient(Long pid, String firstName, String surname, LocalDate dateOfBirth, String careLevel, String roomnumber, Boolean active) {
         super(firstName, surname);
         this.pid = pid;
         this.dateOfBirth = dateOfBirth;
         this.careLevel = careLevel;
         this.roomnumber = roomnumber;
-        this.assets = assets;
+        this.active = active;
     }
 
     /**
@@ -73,8 +62,7 @@ public class Patient extends Person {
      * @param dateOfBirth as string in the following format: YYYY-MM-DD
      */
     public void setDateOfBirth(String dateOfBirth) {
-        LocalDate birthday = DateConverter.convertStringToLocalDate(dateOfBirth);
-        this.dateOfBirth = birthday;
+        this.dateOfBirth = DateConverter.convertStringToLocalDate(dateOfBirth);
     }
 
     /**
@@ -110,22 +98,6 @@ public class Patient extends Person {
     }
 
     /**
-     *
-     * @return assets as string
-     */
-    public String getAssets() {
-        return assets;
-    }
-
-    /**
-     *
-     * @param assets
-     */
-    public void setAssets(String assets) {
-        this.assets = assets;
-    }
-
-    /**
      * adds a treatment to the treatment-list, if it does not already contain it.
      * @param m Treatment
      * @return true if the treatment was not already part of the list. otherwise false
@@ -149,7 +121,11 @@ public class Patient extends Person {
                 "\nBirthday: " + this.dateOfBirth +
                 "\nCarelevel: " + this.careLevel +
                 "\nRoomnumber: " + this.roomnumber +
-                "\nAssets: " + this.assets +
+                "\nRoomnumber: " + this.roomnumber +
                 "\n";
+    }
+
+    public boolean getActive() {
+        return active;
     }
 }
