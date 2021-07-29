@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <HBox layoutX="420.0" layoutY="450.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+            <children>
+                <TextField fx:id="txfSurname" prefHeight="26.0" prefWidth="220.0" promptText="Nutzername" />
+                <TextField fx:id="txfFirstname" prefHeight="26.0" prefWidth="220.0" promptText="Passwort" />
+                <Button fx:id="btnAdd" mnemonicParsing="false" prefWidth="90.0" text="Anmelden" />
+            </children></HBox>
+        <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="200.0" spacing="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" minWidth="400.0" text="Anmelden" textAlignment="CENTER">
+                    <font>
+                        <Font size="36.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+    </children>
+    <padding>
+        <Insets top="10.0" />
+    </padding>
+</AnchorPane>
