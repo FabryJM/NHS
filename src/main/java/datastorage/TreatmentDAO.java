@@ -18,6 +18,11 @@ public class TreatmentDAO extends DAOimp<Treatment> {
     }
 
     @Override
+    public void deletePatientAfterTenYears(long key) throws SQLException {
+
+    }
+
+    @Override
     protected String getCreateStatementString(Treatment treatment) {
         return String.format("INSERT INTO treatment (pid, treatment_date, begin, end, description, remarks) VALUES " +
                 "(%d, '%s', '%s', '%s', '%s', '%s')", treatment.getPid(), treatment.getDate(),

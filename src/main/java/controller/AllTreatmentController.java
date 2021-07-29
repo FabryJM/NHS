@@ -73,7 +73,7 @@ public class AllTreatmentController {
         this.dao = DAOFactory.getDAOFactory().createTreatmentDAO();
         List<Treatment> allTreatments;
         try {
-            allTreatments = dao.readAll();
+            allTreatments = dao.readOnlyActive();
             for (Treatment treatment : allTreatments) {
                 this.tableviewContent.add(treatment);
             }
@@ -107,9 +107,7 @@ public class AllTreatmentController {
             try {
                 allTreatments= this.dao.readAll();
                 for (Treatment treatment : allTreatments) {
-                    if (patient != null && patient.getActive()) { //TODO: DAS WAREN WIR! // SQL-Abfrage SELECT * FROM Patient WHERE active = 1 oder so
-                        this.tableviewContent.add(treatment);
-                    }
+                    this.tableviewContent.add(treatment);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -119,9 +117,7 @@ public class AllTreatmentController {
             try {
                 allTreatments = dao.readTreatmentsByPid(patient.getPid());
                 for (Treatment treatment : allTreatments) {
-//                    if (patient.getActive()) { //TODO: DAS WAREN WIR! // SQL-Abfrage SELECT * FROM Patient WHERE active = 1 oder so
-                        this.tableviewContent.add(treatment);
-//                    }
+                    this.tableviewContent.add(treatment);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
