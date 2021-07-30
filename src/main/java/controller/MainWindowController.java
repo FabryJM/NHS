@@ -52,7 +52,7 @@ public class MainWindowController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        AllTreatmentController controller = loader.getController(); //TODO: Change AllTreatmentController LoginController
+        LoginController controller = loader.getController(); //TODO: Change AllTreatmentController LoginController
     }
 
     @FXML
@@ -63,6 +63,6 @@ public class MainWindowController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        AllTreatmentController controller = loader.getController(); //TODO: Change AllTreatmentController to LoginController
+        LoginController controller = loader.getController(); //TODO: Change AllTreatmentController to LoginController
     }
 }

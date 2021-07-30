@@ -1,5 +1,8 @@
 package controller;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import model.User;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,6 +13,14 @@ import java.util.Scanner;
 
 public class LoginController {
     private User user;
+    protected Connection conn;
+
+    @FXML
+    Button btnLogin;
+
+    public LoginController(Connection conn) {
+        this.conn = conn;
+    }
 
     public void register(Connection connection) throws SQLException {
         Scanner scanner = new Scanner(System.in);
@@ -29,26 +40,27 @@ public class LoginController {
                 inputUsername, inputFirstname, inputLastname, inputDateOfBirth, inputEmail, inputPassword, inputRole));
     }
 
-    public void login(Connection connection) throws SQLException {
+    @FXML
+    public void login() throws SQLException {
         Scanner scanner = new Scanner(System.in);
 
         String inputUsername = scanner.nextLine();
         String inputPassword = scanner.nextLine();
         int id = 0;
 
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(String.format("SELECT USERNAME FROM USER WHER USERNAME = %d", inputUsername));
-        String value ="";
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(String.format("SELECT USERNAME, PASSWORD FROM USER WHERE USERNAME = %s", inputUsername));
+        String valueUsername ="";
+        String valuePassword ="";
         if (resultSet.next()) {
-            value = resultSet.getString("USERNAME");
+            valueUsername = resultSet.getString("USERNAME");
+            valuePassword = resultSet.getString("PASSWORD");
         }
-        if (inputUsername.equals(value)) {
+        if (inputUsername.equals(valueUsername)) {
             String message = "GEILER SCHEISS!";
             int i = 0;
         }
 
 //        statement.executeUpdate(String.format("SELECT USERNAME AND PASSWORD FROM USER WHERE id = %d", id));
-
     }
-
 }
