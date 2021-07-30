@@ -7,25 +7,44 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="855.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <HBox layoutX="420.0" layoutY="450.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
-            <children>
-                <TextField fx:id="txfUsername" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Nutzername" />
-                <TextField fx:id="txfFirstname" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Vorname" />
-                <TextField fx:id="txfLastname" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Nachname" />
-                <TextField fx:id="txfDateOfBirth" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Geburtstag" />
-                <TextField fx:id="txfEmail" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Email" />
-                <TextField fx:id="txfPassword" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Passwort" />
-                <TextField fx:id="txfRole" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Rolle" />
-                <Button fx:id="btnRegister" mnemonicParsing="false" prefWidth="90.0" text="Registrieren" />
-            </children>
-        </HBox>
         <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefWidth="200.0" spacing="25.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="400.0" text="Registrieren" textAlignment="CENTER">
+                <font>
+                    <Font size="36.0" />
+                </font>
+            </Label>
+        </children>
+        </HBox>
+        <HBox layoutX="623.0" layoutY="419.3999938964844" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="0.0">
             <children>
-                <Label alignment="CENTER" contentDisplay="CENTER" minWidth="400.0" text="Registrieren" textAlignment="CENTER">
-                    <font>
-                        <Font size="36.0" />
-                    </font>
-                </Label>
+                <GridPane hgap="10.0" vgap="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" prefWidth="160.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="160.0" prefWidth="160.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="160.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="txfUsername" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Username" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                        <TextField fx:id="txfFirstname" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Vorname" GridPane.rowIndex="1" GridPane.columnIndex="2" />
+                        <TextField fx:id="txfLastname" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Nachname" GridPane.rowIndex="1" GridPane.columnIndex="3" />
+                        <TextField fx:id="txfDateOfBirth" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Geburtstag" GridPane.rowIndex="1" GridPane.columnIndex="4" />
+                        <TextField fx:id="txfEmail" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Email" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                        <TextField fx:id="txfPassword" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Passwort" GridPane.rowIndex="2" GridPane.columnIndex="2" />
+                        <TextField fx:id="txfRole" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" promptText="Rolle" GridPane.rowIndex="2" GridPane.columnIndex="3" />
+                        <Button fx:id="btnRegister" mnemonicParsing="false" minWidth="160.0" prefHeight="26.0" prefWidth="160.0" text="Registrieren" GridPane.rowIndex="2" GridPane.columnIndex="4" />
+                    </children>
+                    <padding>
+                        <Insets right="10.0" />
+                    </padding>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </GridPane>
             </children>
         </HBox>
     </children>
