@@ -26,8 +26,7 @@ public class PatientDAO extends DAOimp<Patient> {
     @Override
     public void deletePatientAfterTenYears(long key) throws SQLException { //TODO: XXXXXXXXXXXXXXXXXXXXXXXXXXXX
         Statement st = conn.createStatement();
-//        LocalDate date = LocalDate.now(); //TODO: EINKOMMENTIEREN UND DIE ZEILE 30 AUSKOMMENTIEREN!!11!!1!
-        LocalDate date = LocalDate.now().plusYears(10);
+        LocalDate date = LocalDate.now();
         if (key != 0) {
             ResultSet expireDateValue = st.executeQuery(String.format("SELECT EXPIRE_DATE FROM PATIENT_LOCK WHERE pid = %d", key));
             String expireDate ="";
